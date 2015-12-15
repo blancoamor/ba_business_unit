@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="ba_business_unit_product_template_tree_view" model="ir.ui.view">
+            <field name="name">product.template.business.unit.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <field name="categ_id" position="after">
+                    <div><field name="business_unit_id" colspan="3" nolabel="1" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+         <record id="ba_business_unit_product_template_filter" model="ir.ui.view">
+            <field name="name">ba.business.unit.product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view" />
+            <field name="arch" type="xml">
+                <xpath expr="filter[@string='Services']"
+                    position="after">
+                     <field string="Business unit" name="business_unit_id" />
+                </xpath>
+                <xpath expr="//filter[@string='Category']"
+                    position="after">
+                    <filter string="Business unit"  domain="[]" context="{'group_by' : 'business_unit_id'}"/>
+                </xpath>                                    
+                </field>
+            </record>
+
+
+    </data>
+</openerp>
